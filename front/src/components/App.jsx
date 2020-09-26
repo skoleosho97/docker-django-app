@@ -1,15 +1,15 @@
-import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
-import Dashboard from "components/Dashboard";
 import React from "react";
+import { Route, BrowserRouter as Router, Switch, Link } from "react-router-dom";
+import Landing from "components/Landing";
 
-const App = () => (
-  <Router>
-    <Switch>
-      <Route exact path="/">
-        <Dashboard />
-      </Route>
-    </Switch>
-  </Router>
-);
-
-export default App;
+export default function App() {
+  return (
+    <Router>
+      <Switch>
+        <Route path="/">
+          <Landing />
+        </Route>
+      </Switch>
+    </Router>
+  );
+}
