@@ -1,0 +1,59 @@
+{% extends 'site/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col py-2">
+                    <div class="page-header d-flex flex-row justify-content-between">
+                        <h4>Posts for {{ course.title }}</h2>
+                        {% if request.user.is_superuser %}
+                        <div><a class="btn btn-outline-success" href="#" role="button">Create New Post</a></div>
+                        {% endif %}
+                    </div>                 
+                </div>
+            </div>
+            {% if posts|length > 0 %}
+            {% for post in posts %}
+            <div class="row">
+                <div class="col">
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            {{ post.title }}
+                            {% if request.user.is_superuser %}
+                                &nbsp;
+                                <span><a class="btn btn-sm btn-outline-info" href="#" role="button">Update Post</a></span>
+                            {% endif %}
+                        </div>
+                        <div class="card-body mb-4">
+                            <p>{{ post.content|slice:250|add:"..." }}</p>
+                            <p class="card-text text-muted">                     
+                                {% for category in post.categories.all %}
+                                    &nbsp;
+                                    <span class="badge badge-pill badge-primary">{{ category }}</span>
+                                    &nbsp;
+                                {% endfor %}
+                            </p>
+                            <a class="btn btn-outline-primary btn-sm mb-3" href="/course/post/{{ post.course.slug }}/{{ post.id }}" role="button">Read More...</a>
+                            <div class="card-footer text-muted">{{ post.created_on }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            {% endif %}
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col py-2">
+                    <div class="page-header d-flex flex-row justify-content-between">
+                        <h4>Course Information</h2>
+                    </div>                 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

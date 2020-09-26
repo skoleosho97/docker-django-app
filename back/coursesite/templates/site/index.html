@@ -1,0 +1,38 @@
+{% extends 'site/base.html' %}
+
+{% block content %}
+<div class="container h-100 d-flex">
+    <div class="row m-auto">
+        <div class="col-md-8">
+            <div class="card">
+                <h5 class="card-header">Most Recent Posts</h5>
+                <ul class="list-group list-group-flush">
+                    {% if posts|length > 0 %}
+                    {% for post in posts %}
+                    <li class="list-group-item">
+                        <p class="font-weight-bold font-italic">{{ post.course }}</p>
+                        <p class="font-weight-normal">{{ post.title }}
+                            {% for category in post.categories.all %}
+                            &nbsp;
+                            <span class="badge badge-pill badge-primary">{{ category }}</span>
+                            &nbsp;
+                            {% endfor %}
+                        </p>
+                        <div><a class="btn btn-outline-primary btn-sm" href="/course/post/{{ post.course.slug }}/{{ post.id }}" role="button">Read More...</a></div>
+                    </li>
+                    {% endfor %}
+                    {% else %}
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-primary text-white text-center p-3">
+                <blockquote class="blockquote mb-0">
+                  Stevenson University Nursing Pages
+                </blockquote>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

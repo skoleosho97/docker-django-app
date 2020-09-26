@@ -1,0 +1,54 @@
+{% load static %}
+
+{% if request.user.is_superuser %}
+<nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+      <img src="{% static 'site/images/su_logo.png' %}" width="200" class="d-inline-block align-top" alt="Stevenson University">
+    </a>
+    <ul class="nav">
+        <li class="nav-item active">
+            <a class="nav-link active" href="{% url 'site:index' %}">Home</a>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Courses
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                {% for course in courses %}
+                    <a class="dropdown-item" href="/site/posts/{{ course.slug }}">{{ course.title }}</a>
+                {% endfor %}
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/admin">Admin Panel</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'admin:logout' %}">Logout</a>
+        </li>
+    </ul>
+</nav>
+{% else %}
+<nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+      <img src="{% static 'site/images/su_logo.png' %}" width="200" class="d-inline-block align-top" alt="Stevenson University">
+    </a>
+    <ul class="nav">
+        <li class="nav-item active">
+            <a class="nav-link active" href="{% url 'site:index' %}">Home</a>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Courses
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                {% for course in courses %}
+                    <a class="dropdown-item" href="site/posts/{{ course.slug }}">{{ course.title }}</a>
+                {% endfor %}
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'admin:index' %}">Administrator Login</a>
+        </li>
+    </ul>
+</nav>
+{% endif %}

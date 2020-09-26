@@ -1,0 +1,31 @@
+{% extends 'site/base.html' %}
+
+{% block content %}
+<div class="container h-100 d-flex">
+    <div class="m-auto">
+         <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            {{ post.title }}
+                            {% if request.user.is_superuser %}
+                                &nbsp;
+                                <span><a class="btn btn-sm btn-outline-info" href="#" role="button">Update Post</a></span>
+                            {% endif %}
+                        </div>
+                        <div class="card-body mb-4">
+                            <p class="card-text text-muted">{{ post.course }}
+                                {% for category in post.categories.all %}
+                                    &nbsp;
+                                    <span class="badge badge-pill badge-primary">{{ category }}</span>
+                                    &nbsp;
+                                {% endfor %}
+                            </p>
+                            <div class="card-footer text-muted">{{ post.created_on }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+{% endblock %}
