@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     # Our Apps
     "core",
     "accounts",
+    "coursesite",
 ]
 
 MIDDLEWARE = [
