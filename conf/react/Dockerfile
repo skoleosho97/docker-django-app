@@ -1,11 +1,13 @@
 FROM node:10-alpine
-MAINTAINER Robert Wells <rwells@dvele.com>
-
+LABEL maintainer="Robert Wells <rwells@dvele.com>"
 
 WORKDIR /tmp
 COPY front/package.json /tmp/
 
+# denotes developmental build
 ENV NODE_ENV=development
+# denotes developmental build
+
 RUN npm config set unsafe-perm true
 
 RUN npm install yarn && \
